@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_camera2"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="fyp.com.camera2.Camera2Activity">
+
+    <TextureView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:id="@+id/textureView" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@mipmap/btn_camera"
+        android:id="@+id/cameraImageButton2"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:contentDescription="@string/video_button"
+        />
+
+    <Chronometer
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/chronometer"
+        android:visibility="invisible"
+        android:textColor="#ffffff"
+        android:textSize="25sp"
+        android:layout_above="@+id/VideoOnlineImageButton"
+        android:layout_alignStart="@+id/VideoOnlineImageButton"
+        android:layout_alignEnd="@+id/VideoOnlineImageButton" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@mipmap/btn_video_online"
+        android:id="@+id/VideoOnlineImageButton"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:contentDescription="@string/camera_button"
+        />
+</RelativeLayout>
