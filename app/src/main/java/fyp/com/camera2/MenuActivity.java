@@ -20,8 +20,23 @@ public class MenuActivity extends AppCompatActivity {
         setContentView(R.layout.activity_menu);
     }
 
+    @Override
+    public void onWindowFocusChanged(boolean hasFocas){
+        super.onWindowFocusChanged(hasFocas);
+        View decorView = getWindow().getDecorView();
+        if(hasFocas){
+            decorView.setSystemUiVisibility(
+                      View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                    | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+                    | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                    | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                    | View.SYSTEM_UI_FLAG_FULLSCREEN
+                    | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
+        }
+    }
+
     public void launchMediaGallery(View view){
-        Intent launchMediaGallery = new Intent(this, Camera2Activity.class);
+        Intent launchMediaGallery = new Intent(this, MediaViewerActivity.class);
         startActivity(launchMediaGallery);
     }
 
