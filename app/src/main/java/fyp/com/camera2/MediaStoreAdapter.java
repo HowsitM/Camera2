@@ -3,12 +3,17 @@ package fyp.com.camera2;
 import android.app.Activity;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+
+import com.bumptech.glide.Glide;
+
+import java.net.URI;
 
 public class MediaStoreAdapter extends RecyclerView.Adapter<MediaStoreAdapter.ViewHolder> {
 
@@ -29,11 +34,12 @@ public class MediaStoreAdapter extends RecyclerView.Adapter<MediaStoreAdapter.Vi
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
 
-        Bitmap bitmap = getBitmapFromMediaStore(position);
+        Glide.with(mActivity).load(getUriFromMediaStore(position)).centerCrop().override(96,96).into(holder.getImageView());
 
+        /*Bitmap bitmap = getBitmapFromMediaStore(position);
         if(bitmap != null){
             holder.getImageView().setImageBitmap(bitmap);
-        }
+        }*/
     }
 
     @Override
@@ -95,4 +101,14 @@ public class MediaStoreAdapter extends RecyclerView.Adapter<MediaStoreAdapter.Vi
                 return null;
         }
     }
+
+    private Uri getUriFromMediaStore(int position){
+        int dataIndex = mMediaStoreCursor.getColumnIndex(MediaStore.Files.FileColumns.DATA);
+        mMediaStoreCursor.moveToPosition(position);
+        String dataString = mMediaStoreCursor.getString(dataIndex);
+        Uri mediaUri = Uri.parse("file://" + dataString);
+        return mediaUri;
+    }
+
+
 }

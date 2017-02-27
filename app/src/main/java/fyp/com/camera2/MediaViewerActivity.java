@@ -77,8 +77,10 @@ public class MediaViewerActivity extends AppCompatActivity  implements LoaderMan
 
         switch (id) {
             case MEDIASTORE_LOADER_ID:
-                String[] projection = {MediaStore.Files.FileColumns._ID,
+                String[] projection = {
+                        MediaStore.Files.FileColumns._ID,
                         MediaStore.Files.FileColumns.DATE_ADDED,
+                        MediaStore.Files.FileColumns.DATA,
                         MediaStore.Files.FileColumns.MEDIA_TYPE
                 };
                 String selection =
