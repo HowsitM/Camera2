@@ -1,10 +1,10 @@
 package fyp.com.camera2;
 
 import android.Manifest;
-import android.content.Context;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.os.Build;
+import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v4.app.LoaderManager;
@@ -12,7 +12,8 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
 
 public class MediaViewerActivity extends AppCompatActivity  implements LoaderManager.LoaderCallbacks<Cursor>{
@@ -20,10 +21,20 @@ public class MediaViewerActivity extends AppCompatActivity  implements LoaderMan
     private final static int READ_EXTERNAL_STORAGE_PERMISSION_RESULT = 0;
     private final static int MEDIASTORE_LOADER_ID = 0;
 
+    private RecyclerView mThumbnailRecyclerView;
+    private MediaStoreAdapter mMediaStoreAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_media_viewer);
+
+        mThumbnailRecyclerView = (RecyclerView) findViewById(R.id.thumbnailRecyclerView);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2);
+        mThumbnailRecyclerView.setLayoutManager(gridLayoutManager);
+        mMediaStoreAdapter = new MediaStoreAdapter(this);
+        mThumbnailRecyclerView.setAdapter(mMediaStoreAdapter);
+
 
         checkReadExternalStoragePermission();
     }
@@ -63,22 +74,34 @@ public class MediaViewerActivity extends AppCompatActivity  implements LoaderMan
     //Gets initialised on a background thread so its faster
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-        String[] projection = { MediaStore.Files.FileColumns._ID,
-                                MediaStore.Files.FileColumns.DATE_ADDED,
-                                MediaStore.Files.FileColumns.MEDIA_TYPE
-        };
-        String selection = MediaStore.Files.FileColumns.MEDIA_TYPE + "=" + MediaStore.Files.FileColumns.MEDIA_TYPE_VIDEO;
 
-        return new CursorLoader(this, MediaStore.Files.getContentUri("external"), projection, selection, null, MediaStore.Files.FileColumns.DATE_ADDED + "DESC");
+        switch (id) {
+            case MEDIASTORE_LOADER_ID:
+                String[] projection = {MediaStore.Files.FileColumns._ID,
+                        MediaStore.Files.FileColumns.DATE_ADDED,
+                        MediaStore.Files.FileColumns.MEDIA_TYPE
+                };
+                String selection =
+                                MediaStore.Files.FileColumns.MEDIA_TYPE + "=" +
+                                MediaStore.Files.FileColumns.MEDIA_TYPE_VIDEO;
+
+                return new CursorLoader(this, MediaStore.Files.getContentUri("external"),
+                        projection,
+                        selection,
+                        null,
+                        MediaStore.Files.FileColumns.DATE_ADDED + " DESC");
+            default:
+                return null;
+        }
     }
 
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
-
+        mMediaStoreAdapter.changeCursor(data);
     }
 
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
-
+        mMediaStoreAdapter.changeCursor(null);
     }
 }

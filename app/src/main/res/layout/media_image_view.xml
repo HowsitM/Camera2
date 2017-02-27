@@ -5,12 +5,13 @@
     android:layout_height="wrap_content">
 
     <ImageView
-        android:layout_width="128dp"
-        android:layout_height="128dp"
+        android:paddingBottom="1dp"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
         app:srcCompat="@mipmap/btn_camera"
         android:id="@+id/mediaStoreOImageView"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
-
+        android:background="@color/colorGrey"
         />
 </RelativeLayout>
