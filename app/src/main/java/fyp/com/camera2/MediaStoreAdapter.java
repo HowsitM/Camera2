@@ -10,11 +10,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-
 public class MediaStoreAdapter extends RecyclerView.Adapter<MediaStoreAdapter.ViewHolder> {
 
     private Cursor mMediaStoreCursor;
-    private Activity mActivity;
+    private final Activity mActivity;
+
+    public MediaStoreAdapter(Activity mActivity){
+        this.mActivity = mActivity;
+    }
+
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
