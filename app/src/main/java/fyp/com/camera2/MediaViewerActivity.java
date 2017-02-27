@@ -1,8 +1,10 @@
 package fyp.com.camera2;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -16,7 +18,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
 
-public class MediaViewerActivity extends AppCompatActivity  implements LoaderManager.LoaderCallbacks<Cursor>{
+public class MediaViewerActivity extends AppCompatActivity  implements LoaderManager.LoaderCallbacks<Cursor>, MediaStoreAdapter.OnClickThumbListener{
 
     private final static int READ_EXTERNAL_STORAGE_PERMISSION_RESULT = 0;
     private final static int MEDIASTORE_LOADER_ID = 0;
@@ -34,7 +36,6 @@ public class MediaViewerActivity extends AppCompatActivity  implements LoaderMan
         mThumbnailRecyclerView.setLayoutManager(gridLayoutManager);
         mMediaStoreAdapter = new MediaStoreAdapter(this);
         mThumbnailRecyclerView.setAdapter(mMediaStoreAdapter);
-
 
         checkReadExternalStoragePermission();
     }
@@ -105,5 +106,18 @@ public class MediaViewerActivity extends AppCompatActivity  implements LoaderMan
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
         mMediaStoreAdapter.changeCursor(null);
+    }
+
+    @Override
+    public void OnClickImage(Uri imageUri) {
+        Toast.makeText(MediaViewerActivity.this, "Image uri = " + imageUri.toString(), Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void OnClickVideo(Uri videoUri) {
+
+        Intent fullScreenIntent = new Intent(this, FullScreenActivity.class);
+        fullScreenIntent.setData(videoUri);
+        startActivity(fullScreenIntent);
     }
 }
