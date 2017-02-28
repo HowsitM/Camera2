@@ -46,7 +46,7 @@ public class MenuActivity extends AppCompatActivity {
     }
 
     public void launchAnalysis (View view) {
-        Intent launchAnalysis = new Intent(this, Camera2Activity.class);
+        Intent launchAnalysis = new Intent(this, AnalyseSelectionActivity.class);
         startActivity(launchAnalysis);
     }
 }

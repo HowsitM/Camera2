@@ -22,7 +22,8 @@
         </activity>
         <activity android:name=".Camera2Activity" />
         <activity android:name=".MediaViewerActivity" />
-        <activity android:name=".FullScreenActivity"></activity>
+        <activity android:name=".FullScreenActivity" />
+        <activity android:name=".AnalyseSelectionActivity"></activity>
     </application>
 
 </manifest>
