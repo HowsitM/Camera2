@@ -45,8 +45,8 @@ public class MenuActivity extends AppCompatActivity {
         startActivity(launchMediaGallery);
     }
 
-    public void launchAnalysis (View view) {
-        Intent launchAnalysis = new Intent(this, AnalyseSelectionActivity.class);
-        startActivity(launchAnalysis);
+    public void launchAnalysisSelection (View view) {
+        Intent AnalyseSelection = new Intent(this, AnalyseSelectionActivity.class);
+        startActivity(AnalyseSelection);
     }
 }

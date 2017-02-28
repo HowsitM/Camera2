@@ -43,7 +43,7 @@
             android:background="@android:drawable/ic_menu_sort_by_size"
             android:layout_alignParentBottom="true"
             android:layout_alignStart="@+id/LaunchVideo"
-            android:onClick="launchAnalysis"/>
+            android:onClick="launchAnalysisSelection"/>
 
     </RelativeLayout>
 </RelativeLayout>

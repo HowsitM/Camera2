@@ -33,6 +33,7 @@
         android:fontFamily="sans-serif-medium"
         android:textSize="30sp"
         android:textColor="@color/colorWhite"
+        android:onClick="launchAnalysis"
         android:background="@android:color/holo_red_dark" />
 
     <VideoView
